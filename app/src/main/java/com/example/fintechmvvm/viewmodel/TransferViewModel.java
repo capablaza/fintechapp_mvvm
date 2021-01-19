@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.example.fintechmvvm.model.Transfer;
 import com.example.fintechmvvm.service.ITransfer;
+import com.example.fintechmvvm.service.TransferResponse;
 
 public class TransferViewModel implements ViewModel {
 
@@ -27,13 +28,17 @@ public class TransferViewModel implements ViewModel {
     }
 
     public void onClickTransferAction(){
+
+        TransferResponse response = service.transfer(model.getFrom(), model.getTo(), model.getAmountInt());
+
+        toastMessage(response.message());
+
+    }
+
+    private void toastMessage(String message){
         int duration = Toast.LENGTH_LONG;
-
-        Toast toast = Toast.makeText(context, model.toString(), duration);
+        Toast toast = Toast.makeText(context, message, duration);
         toast.show();
-
-        service.transfer(model.getFrom(), model.getTo(), model.getAmountInt());
-
     }
 
     @Override

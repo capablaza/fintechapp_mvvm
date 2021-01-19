@@ -5,14 +5,16 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.example.fintechmvvm.api.TransferClientStub;
 import com.example.fintechmvvm.databinding.ActivityMainBinding;
+import com.example.fintechmvvm.db.StorageDummy;
 import com.example.fintechmvvm.service.ITransfer;
 import com.example.fintechmvvm.service.TransferService;
 import com.example.fintechmvvm.viewmodel.TransferViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    ITransfer service = new TransferService();
+    ITransfer service = new TransferService(new TransferClientStub(), new StorageDummy());
 
     TransferViewModel viewModel = new TransferViewModel(service);
 
